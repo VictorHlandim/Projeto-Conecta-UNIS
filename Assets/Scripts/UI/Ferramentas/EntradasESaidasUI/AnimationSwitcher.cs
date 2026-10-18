@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class AnimationSwitcher : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+public class AnimationSwitcher : UI, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     private bool highlight;
 

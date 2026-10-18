@@ -22,6 +22,7 @@ public class Switcher : MonoBehaviour, IPointerDownHandler
     public Image Fav;
     public Image Env;
     public Image Vag;
+    public Image Per;
 
     private void Awake()
     {
@@ -33,7 +34,7 @@ public class Switcher : MonoBehaviour, IPointerDownHandler
     }
     private void NavBarHandle()
     {
-        if(Fav == null || Env == null || Vag == null)
+        if(Fav == null || Env == null || Vag == null || Per == null)
         {
             Debug.LogWarning("Algum dos elementos da NavBar não foi atribuído no inspetor.");
             return;
@@ -42,6 +43,7 @@ public class Switcher : MonoBehaviour, IPointerDownHandler
         {
             Fav.CrossFadeColor(OgColor, FadeTime, true, true);
             Env.CrossFadeColor(Target, FadeTime, true, true);
+            Per.CrossFadeColor(OgColor, FadeTime, true, true);
             Vag.CrossFadeColor(OgColor, FadeTime, true, true);
         }
         else if(ui.dashboard.gameObject.activeInHierarchy)
@@ -49,12 +51,21 @@ public class Switcher : MonoBehaviour, IPointerDownHandler
             Fav.CrossFadeColor(OgColor, FadeTime, true, true);
             Env.CrossFadeColor(OgColor, FadeTime, true, true);
             Vag.CrossFadeColor(Target, FadeTime, true, true);
+            Per.CrossFadeColor(OgColor, FadeTime, true, true);
         }
         else if (ui.favoritos.gameObject.activeInHierarchy)
         {
             Fav.CrossFadeColor(Target, FadeTime, true, true);
             Env.CrossFadeColor(OgColor, FadeTime, true, true);
             Vag.CrossFadeColor(OgColor, FadeTime, true, true);
+            Per.CrossFadeColor(OgColor, FadeTime, true, true);
+        }
+        else if (ui.perfil.gameObject.activeInHierarchy)
+        {
+            Fav.CrossFadeColor(OgColor, FadeTime, true, true);
+            Env.CrossFadeColor(OgColor, FadeTime, true, true);
+            Vag.CrossFadeColor(OgColor, FadeTime, true, true);
+            Per.CrossFadeColor(Target, FadeTime, true, true);
         }
     }
     public void Switching()
@@ -69,6 +80,9 @@ public class Switcher : MonoBehaviour, IPointerDownHandler
                 break;
             case WhereToGo.Enviados:
                 ui.ShowEnviados();
+                break;
+            case WhereToGo.Perfil:
+                ui.ShowPerfil();
                 break;
             default:
                 Debug.LogWarning("To sem valor papai");
@@ -86,6 +100,7 @@ public class Switcher : MonoBehaviour, IPointerDownHandler
         None,
         Favoritos,
         Vagas,
-        Enviados
+        Enviados,
+        Perfil
     }
 }
