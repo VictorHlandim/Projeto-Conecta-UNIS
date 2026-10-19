@@ -36,7 +36,6 @@ public class Switcher : MonoBehaviour, IPointerDownHandler
     {
         if(Fav == null || Env == null || Vag == null || Per == null)
         {
-            Debug.LogWarning("Algum dos elementos da NavBar não foi atribuído no inspetor.");
             return;
         }
         if (ui.enviados.gameObject.activeInHierarchy)
@@ -84,13 +83,19 @@ public class Switcher : MonoBehaviour, IPointerDownHandler
             case WhereToGo.Perfil:
                 ui.ShowPerfil();
                 break;
+            case WhereToGo.CadastroGeral:
+                ui.ShowCadGeral();
+                break;
+            case WhereToGo.CadastroEmpresa:
+                    ui.ShowCadEmpresa();
+                    break;
             default:
-                Debug.LogWarning("To sem valor papai");
+                Debug.LogWarning("To sem valor papai (Switch case)");
                 break;
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public virtual void OnPointerDown(PointerEventData eventData)
     {
         Switching();
     }
@@ -101,6 +106,9 @@ public class Switcher : MonoBehaviour, IPointerDownHandler
         Favoritos,
         Vagas,
         Enviados,
-        Perfil
+        Perfil,
+        CadastroGeral,
+        CadastroEmpresa,
+        CadastroCandidato
     }
 }
