@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Supabase.Realtime</id>
+    <version>8.4.0</version>
+    <authors>Supabase</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>icon.png</icon>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/supabase/supabase-csharp/tree/master/packages/Realtime</projectUrl>
+    <description>Supabase Realtime client for .NET for Postgres changes, broadcast and presence over websockets.</description>
+    <copyright>MIT</copyright>
+    <tags>supabase realtime websocket postgres broadcast presence phoenix</tags>
+    <repository type="git" url="https://github.com/supabase/supabase-csharp" commit="3431a5f9545c84a626f84e964fe7e66bd5141b2c" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="Supabase.Core" version="8.4.0" exclude="Build,Analyzers" />
+        <dependency id="Supabase.Postgrest" version="8.4.0" exclude="Build,Analyzers" />
+        <dependency id="System.Text.Json" version="8.0.5" exclude="Build,Analyzers" />
+        <dependency id="Websocket.Client" version="5.5.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

@@ -30,4 +30,12 @@ public class AnimEventUI : UI
     {
         base.ShowCadGeral();
     }
+    override public void ShowEmpresa()
+    {
+        base.ShowEmpresa();
+    }
+    override public void ShowCandidato()
+    {
+        base.ShowCandidato();
+    }
 }

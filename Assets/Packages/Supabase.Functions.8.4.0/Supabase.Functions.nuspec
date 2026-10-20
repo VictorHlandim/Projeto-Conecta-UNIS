@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>Supabase.Functions</id>
+    <version>8.4.0</version>
+    <authors>Supabase</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>icon.png</icon>
+    <readme>README.md</readme>
+    <projectUrl>https://github.com/supabase/supabase-csharp/tree/master/packages/Functions</projectUrl>
+    <description>Supabase Edge Functions client for .NET that invokes functions with typed and streamed responses.</description>
+    <copyright>MIT</copyright>
+    <tags>supabase edge-functions functions serverless streaming</tags>
+    <repository type="git" url="https://github.com/supabase/supabase-csharp" commit="3431a5f9545c84a626f84e964fe7e66bd5141b2c" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="Supabase.Core" version="8.4.0" exclude="Build,Analyzers" />
+        <dependency id="System.Diagnostics.DiagnosticSource" version="8.0.1" exclude="Build,Analyzers" />
+        <dependency id="System.Text.Json" version="8.0.5" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

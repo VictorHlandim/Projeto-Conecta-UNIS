@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
+    public AvatarCropEditor avatarCrop;
+    public SupabaseManager supabaseManager { get; private set; }
     public Favoritos favoritos { get; private set; }
     public Dashboard dashboard { get; private set; }
     public Enviados enviados { get; private set; }
@@ -10,12 +12,24 @@ public class UI : MonoBehaviour
     public CandidatoCadastro CadCandidato { get; private set; }
     public EmpresaCadastro CadEmpresa { get; private set; }
 
+    public EmpresaSection empresa { get; private set; }
+    public CandidatoSection candidato { get; private set; }
+
     private void Awake()
     {
+
         favoritos = GetComponentInChildren<Favoritos>(true);
         dashboard = GetComponentInChildren<Dashboard>(true);
         enviados = GetComponentInChildren<Enviados>(true);
         perfil = GetComponentInChildren<Perfil>(true);
+        supabaseManager = FindFirstObjectByType<SupabaseManager>(
+            FindObjectsInactive.Include);
+
+        candidato = FindFirstObjectByType<CandidatoSection>(
+            FindObjectsInactive.Include);
+
+        empresa = FindFirstObjectByType<EmpresaSection>(
+            FindObjectsInactive.Include);
 
         geral = FindFirstObjectByType<CadastroGeral>(
             FindObjectsInactive.Include);
@@ -26,18 +40,52 @@ public class UI : MonoBehaviour
         CadEmpresa = FindFirstObjectByType<EmpresaCadastro>(
             FindObjectsInactive.Include);
 
+        avatarCrop = FindFirstObjectByType<AvatarCropEditor>(
+            FindObjectsInactive.Include);
+
+
         Debug.Log($"Cadastro Geral: {geral}");
         Debug.Log($"Cadastro Candidato: {CadCandidato}");
         Debug.Log($"Cadastro Empresa: {CadEmpresa}");
+        Debug.Log($"Empresa Section: {empresa}");
+        Debug.Log($"Candidato Section: {candidato}");
+        if (avatarCrop != null)
+        {
+            Debug.Log($"Crop encontrado: {avatarCrop.gameObject.name}");
+        }
+        else
+        {
+            Debug.LogError("AvatarCropEditor não foi encontrado na cena!");
+        }
     }
     private void Update()
     {
         
     }
 
+    private void Start()
+    {
+        try
+        {
+            dashboard.LoadDashboard();
+            perfil.LoadProfile();
+        }
+        catch
+        {
+            Debug.LogAssertion("Falha ao inicializar");
+        }
+    }
+
     #region UI Event Changer Overrides
 
     #region Cadastro
+
+    public virtual void desativarCadastros()
+    {
+        CadEmpresa.gameObject?.SetActive(false);
+        CadCandidato.gameObject?.SetActive(false);
+        geral.gameObject?.SetActive(false);
+    }
     public virtual void ShowCadEmpresa(){
         CadEmpresa.gameObject?.SetActive(true);
         CadCandidato.gameObject?.SetActive(false);
@@ -53,10 +101,43 @@ public class UI : MonoBehaviour
         CadCandidato.gameObject?.SetActive(false);
         geral.gameObject.SetActive(true);
     }
+
     #endregion
 
+    public virtual void ShowEmpresa()
+    {
+        empresa.gameObject.SetActive(true);
+        candidato.gameObject?.SetActive(false);
+        desativarCadastros();
+    }
+    public virtual void ShowCandidato()
+    {
+        candidato.gameObject.SetActive(true);
+        empresa.gameObject?.SetActive(false);
+        desativarCadastros();
+    }
+    public void AbrirPainelFoto()
+    {
+        if (avatarCrop == null)
+        {
+            Debug.LogError("Não é possível abrir: AvatarCropEditor está nulo.");
+            return;
+        }
 
+        avatarCrop.gameObject.SetActive(true);
+        Debug.Log("Painel de foto aberto.");
+    }
 
+    public void FecharPainelFoto()
+    {
+        if (avatarCrop == null)
+        {
+            Debug.LogError("Não é possível fechar: AvatarCropEditor está nulo.");
+            return;
+        }
+
+        avatarCrop.gameObject.SetActive(false);
+    }
     #region Candidato
     public virtual void ShowFavoritos()
     {
